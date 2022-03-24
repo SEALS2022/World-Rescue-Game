@@ -1,8 +1,9 @@
 import Game from "./scenes/Game.js";
 
 const config = {
-  width: 800,
-  height: 600,
+  width: 1025,
+  height: 750,
+  backgroundColor: "#10a5f5",
   type: Phaser.AUTO,
   // Set Physics
   physics: {

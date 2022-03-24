@@ -1,9 +1,11 @@
 import Phaser from "phaser";
 
-export default class Robot extends Phaser.GameObjects.Image {
+export default class Robot extends Phaser.Physics.Arcade.Sprite {
   constructor(scene, x, y, texture) {
     super(scene, x, y, texture);
-    this.image = scene.add.existing(this);
+    scene.add.existing(this);
+    scene.physics.add.existing(this);
+    this.setCollideWorldBounds(true);
   }
 
   preload() {}
@@ -13,19 +15,15 @@ export default class Robot extends Phaser.GameObjects.Image {
   update(input) {
     // move right
     if (input.right.isDown) {
-      this.image.x += 5;
+      this.x += 5;
     }
     // move left
     if (input.left.isDown) {
-      this.image.x -= 5;
+      this.x -= 5;
     }
     // move up
     if (input.up.isDown) {
-      this.image.y -= 5;
-    }
-    // move down
-    if (input.down.isDown) {
-      this.image.y += 5;
+      this.y -= 9;
     }
   }
 
