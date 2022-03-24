@@ -1,4 +1,3 @@
-
 import Phaser from "phaser";
 
 export default class Robot extends Phaser.GameObjects.Image {
@@ -29,4 +28,10 @@ export default class Robot extends Phaser.GameObjects.Image {
       this.image.y += 5;
     }
   }
+
+  // collectCoin(player, coins, score, scoreText){
+  //   coins.disableBody(true, true);
+  //   score += 1;
+  //   scoreText.setText("score: "+ score )
+  // }
 }

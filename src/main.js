@@ -1,4 +1,4 @@
-import Game from "./scenes/Game";
+import Game from "./scenes/Game.js";
 
 const config = {
   width: 800,
@@ -9,7 +9,7 @@ const config = {
     default: "arcade",
     arcade: {
       gravity: { y: 700 },
-      debug: false,
+      debug: true,
     },
   },
   scene: [Game],
