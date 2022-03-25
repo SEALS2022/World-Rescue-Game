@@ -4,6 +4,7 @@ import bg from "../assets/img/background-iceberg.png";
 import rob from "../assets/img/player.png";
 import Robot from "../objects/Player.js";
 import coin from "../assets/img/coin.png";
+import penguin from "../assets/img/Penguin.png"
 // import Coin from "../objects/Coins";
 
 export default class Game extends Phaser.Scene {
@@ -17,9 +18,12 @@ export default class Game extends Phaser.Scene {
     // load image
     this.load.image("player", `${rob}`);
     this.load.image("coins", `${coin}`);
+    this.load.image("animal", `${penguin}`)
     // load tilemap and tileset we used
     this.load.image("tileset", "assets/icemap-tilesheet.png");
     this.load.tilemapTiledJSON("icemap", "assets/ice-world.json");
+
+    // const platforms = map.createStaticLayer('platform', tileset, 0, 200 )
   }
 
   create() {
@@ -34,12 +38,45 @@ export default class Game extends Phaser.Scene {
     // player
     this.player = new Robot(this, 0, 100, "player");
     this.physics.add.sprite(this.player);
-    this.player.setPosition(0, 1600).setScale(1);
+    this.player.setPosition(0, 1400).setScale(1);
+    this.player.setCollideWorldBounds(true);
+
+
+//     playerWonText = this.add.text(
+//   this.physics.world.bounds.width / 2,
+//   this.physics.world.bounds.height / 2,
+//   'You won!',
+//   {
+//     fontFamily: 'Monaco, Courier, monospace',
+//     fontSize: '50px',
+//     fill: '#fff'
+//   },
+// );
+
+// playerWonText.setOrigin(0.5);
+
+// // Make it invisible until the player wins
+// playerWonText.setVisible(false);
+
+
+    //penguin
+    this.animal = this.physics.add.sprite(300, 0, "animal");
+    this.animal.setPosition(100,1000).setScale(0.2);
+    this.physics.add.collider(this.player, this.animal, (player, animal) =>{
+      animal.disableBody(true, true);
+      alert('You won the game, congratulations!');
+      location.reload();
+      // this.scene.start('Win')
+      // this.score += 10;
+      // this.scoreText.setText("Score: " + this.score);
+    })
+    this.animal.setCollideWorldBounds(true);
     // score board
     this.scoreText = this.add.text(16, 16, "Score: 0", {
       fontSize: "32px",
       fill: "#000",
     });
+    this.physics.add.collider(this.player, iceWorld);
 
     // objects
     // this.coins = this.physics.add.sprite(300, 0, "coins");
@@ -66,7 +103,19 @@ export default class Game extends Phaser.Scene {
       .startFollow(this.player)
       .setZoom(1);
 
-    this.physics.add.collider(this.player, iceWorld);
+
+
+
+    //   this.spikes = this.physics.add.group({
+    //     allowGravity: false,
+    //     immovable: true
+    //   });
+
+    //   map.getObjectLayer('Spikes').objects.forEach((spike) => {
+    //     // Add new spikes to our sprite group
+    //     const spikeSprite = this.spikes.create(spike.x, spike.y, 'spike').setOrigin(0);
+    // });
+        
     // inputs
     this.input = this.input.keyboard.createCursorKeys();
   }

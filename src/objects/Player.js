@@ -25,6 +25,9 @@ export default class Robot extends Phaser.Physics.Arcade.Sprite {
     if (input.up.isDown) {
       this.y -= 9;
     }
+
+
+
   }
 
   // collectCoin(player, coins, score, scoreText){
