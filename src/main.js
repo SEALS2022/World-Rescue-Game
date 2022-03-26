@@ -1,5 +1,5 @@
 import Game from "./scenes/Game.js";
-
+import Win from "../src/scenes/Win.js"
 const config = {
   width: 1025,
   height: 750,
@@ -13,7 +13,8 @@ const config = {
       debug: true,
     },
   },
-  scene: [Game],
+  scene: [Game, Win],
+
 };
 
 new Phaser.Game(config);

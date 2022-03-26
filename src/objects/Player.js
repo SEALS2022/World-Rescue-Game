@@ -13,21 +13,24 @@ export default class Robot extends Phaser.Physics.Arcade.Sprite {
   create() {}
 
   update(input) {
-    // move right
-    if (input.right.isDown) {
-      this.x += 5;
-    }
-    // move left
-    if (input.left.isDown) {
-      this.x -= 5;
-    }
-    // move up
-    if (input.up.isDown) {
-      this.y -= 9;
+    if(input.right.isDown){
+      this.setVelocityX(200)
+    }else if(input.left.isDown){
+      this.setVelocityX(-200)
+    }else{
+      this.setVelocityX(0)
     }
 
+    if(input.up.isDown){
+      this.setVelocityY(-400)
 
+    }
 
+    if(this.body.velocity.x > 0){
+      this.setFlipX(false)
+    }else if(this.body.velocity.x < 0){
+      this.setFlipX(true)
+    }
   }
 
   // collectCoin(player, coins, score, scoreText){

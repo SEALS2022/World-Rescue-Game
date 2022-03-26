@@ -6,6 +6,7 @@ import Robot from "../objects/Player.js";
 import coin from "../assets/img/coin.png";
 import penguin from "../assets/img/Penguin.png"
 // import Coin from "../objects/Coins";
+// import Win from '../scenes/Win.js'
 
 export default class Game extends Phaser.Scene {
   constructor() {
@@ -61,22 +62,26 @@ export default class Game extends Phaser.Scene {
 
     //penguin
     this.animal = this.physics.add.sprite(300, 0, "animal");
-    this.animal.setPosition(100,1000).setScale(0.2);
-    this.physics.add.collider(this.player, this.animal, (player, animal) =>{
-      animal.disableBody(true, true);
-      alert('You won the game, congratulations!');
-      location.reload();
-      // this.scene.start('Win')
-      // this.score += 10;
-      // this.scoreText.setText("Score: " + this.score);
-    })
+    this.animal.setPosition(1040,0).setScale(0.2);
+    this.physics.add.collider(this.player, this.animal, () => {
+      if (true)
+      {
+        // this.player.x = 10
+        this.scene.start('win')
+        console.log("you win") 
+      }
+    });
     this.animal.setCollideWorldBounds(true);
     // score board
     this.scoreText = this.add.text(16, 16, "Score: 0", {
       fontSize: "32px",
       fill: "#000",
     });
+
+    this.physics.world.setBounds( 0, 1400, );
+
     this.physics.add.collider(this.player, iceWorld);
+    this.physics.add.collider(this.animal, iceWorld);
 
     // objects
     // this.coins = this.physics.add.sprite(300, 0, "coins");
